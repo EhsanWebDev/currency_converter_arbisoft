@@ -14,7 +14,20 @@ const INITIAL_STATE = {
 const theme = createSlice({
     initialState: INITIAL_STATE,
     name: "themes",
+    reducers: {
+        change_theme: (state, action) => {
+            const { payload, } = action || {}
+            const { selected_theme, isDarkThemeSelected } = payload || {}
+            state.theme = {
+                ...state.theme,
+                selected_theme,
+                isDarkThemeSelected
+            }
+        }
+    }
 
 })
 
 export const themeReducer = theme.reducer
+
+export const { change_theme } = theme.actions

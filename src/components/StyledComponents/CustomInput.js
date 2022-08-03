@@ -12,8 +12,8 @@ const { dark, ghost_white, black } = colors || {}
 
 const StyledInput = styled.TextInput.attrs({
     secureTextEntry: false,
-    placeholderColor: "#fff",
-    selectionColor: "#fff",
+    placeholderColor: props => props.isDark ? colors.ghost_white : colors.black,
+    selectionColor: colors.ghost_white,
     keyboardType: "numeric"
 
 })`
@@ -22,15 +22,12 @@ margin: ${props => props.mv ?? generalSizes.sizeMd}px ${props => props.mh ?? 0}p
 flex:1;
 font-size: ${generalSizes.baseFontSize}px ;
 padding: 0px 6px;
-color:${props => props.color || "white"}
+color:${props => props.isDark ? colors.ghost_white : colors.black};
+background-color:rgba(255,255,255,0.1)
 `
 
 const InputText = styled(CustomText)`
-  color: ${colors.ghost_white};
-//   border-right-color: #fff; 
-//   border-right-width: 1px;
-  padding:0 8px;
-
+  padding:0 16px;
 `;
 
 const InputBtn = styled(CustomBtn)`
@@ -42,12 +39,16 @@ const CustomInput = (props) => {
     const { theme } = useSelector(store => store.themes)
     const { isDarkThemeSelected } = theme || {}
     return (
-        <Container mh={0} height={50} border_r={12} jc="space-between" align_items="center"
-            bg={isDarkThemeSelected ? " rgba(242, 242, 242, 0.15)" : black} >
-            <InputText bold color={colors.purple}>USD</InputText>
-            <StyledInput {...props} />
+        <Container
+            mh={0}
+            height={50}
+            border_r={12}
+            jc="space-between" align_items="center"
+            bg={isDarkThemeSelected ? "rgba(0, 0, 0, 0.3)" : "#00000030"} >
+            <InputText bold>USD</InputText>
+            <StyledInput isDark={isDarkThemeSelected} {...props} />
             <InputBtn>
-                <IonIcon name='sync' size={24} color="white" onPress={() => { }} />
+                <IonIcon name='sync' size={24} color={isDarkThemeSelected ? colors.ghost_white : colors.black} onPress={() => { }} />
             </InputBtn>
         </Container>
 
