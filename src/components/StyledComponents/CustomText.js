@@ -13,6 +13,7 @@ font-size:${props => `${props.size ?? generalSizes.baseFontSize}px`};
 font-family:${props => props.bold ? app_fonts.Roboto_Bold : app_fonts.Roboto};
 color: ${props => props.color};
 margin: ${props => props.mv ?? 0}px ${props => props.mh ?? 0}px;
+text-align: ${props => props.textCenter ? "center" : "left"}
 `
 
 
@@ -34,7 +35,8 @@ CustomText.propTypes = {
         PropTypes.array
     ]).isRequired,
     size: PropTypes.number,
-    bold: PropTypes.bool
+    bold: PropTypes.bool,
+    textCenter: PropTypes.bool
 }
 
 export default CustomText

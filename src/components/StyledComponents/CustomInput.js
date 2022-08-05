@@ -8,11 +8,12 @@ import CustomText from './CustomText';
 import IonIcon from "react-native-vector-icons/Ionicons"
 import CustomBtn from './CustomBtn';
 import { TextInput } from 'react-native';
+import PropTypes from "prop-types"
 
 const { dark, ghost_white, black } = colors || {}
 
 const StyledInput = styled.TextInput.attrs({
-    secureTextEntry: false,
+
     placeholderColor: props => props.isDark ? colors.ghost_white : colors.black,
     selectionColor: colors.ghost_white,
     keyboardType: "numeric"
@@ -37,6 +38,8 @@ padding:12px;
 `
 
 const CustomInput = (props) => {
+    const { hideInputIcon, inputLabel, boldLabel } = props || {}
+
     const { themes, currencyData } = useSelector(store => store)
     const { isLoading, currency, baseCurrency } = currencyData || {}
     const { theme } = themes || {}
@@ -48,15 +51,22 @@ const CustomInput = (props) => {
             border_r={12}
             jc="space-between" align_items="center"
             bg={isDarkThemeSelected ? "rgba(0, 0, 0, 0.3)" : "#00000030"} >
-            <InputText bold>{baseCurrency}</InputText>
+            <InputText bold={boldLabel} size={14}>{inputLabel}</InputText>
             <StyledInput isDark={isDarkThemeSelected} {...props} />
 
-            <InputBtn>
+            {!hideInputIcon && <InputBtn>
                 <IonIcon name='sync' size={24} color={isDarkThemeSelected ? colors.ghost_white : colors.black} onPress={() => { }} />
-            </InputBtn>
+            </InputBtn>}
+
         </Container>
 
     )
+}
+
+CustomInput.propTypes = {
+    hideInputIcon: PropTypes.bool,
+    inputLabel: PropTypes.string.isRequired,
+    boldLabel: PropTypes.bool
 }
 
 export default CustomInput

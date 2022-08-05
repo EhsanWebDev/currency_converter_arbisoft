@@ -13,6 +13,7 @@ import { sagaActions } from '../../../Api/Sagas/sagaActions';
 import { currencyFetchLoading, currencyFetchSuccess, fetchCurrencyData } from '../../../store/currencyReducer/currencyReducer';
 import DropdownBar from './components/DropdownBar';
 import CurrencyCard from './components/CurrencyCard';
+import { APP_ROUTES } from '../../../navigation/AppRoutes';
 
 
 
@@ -90,7 +91,7 @@ const Home = ({ navigation: { navigate } }) => {
                             <IonIcon
                                 name='ios-settings-outline' size={24}
                                 color={isDarkThemeSelected ? colors.ghost_white : colors.black}
-                                onPress={() => navigate("Settings")} />
+                                onPress={() => navigate(APP_ROUTES.APP_SETTINGS_SCREEN)} />
                         </Container>
 
                         <Container flex_dir="column" mh={0} mv={20}>

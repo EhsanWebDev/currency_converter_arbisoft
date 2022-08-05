@@ -3,7 +3,7 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, Touc
 import Container from "../../../../components/StyledComponents/Container";
 import CustomText from "../../../../components/StyledComponents/CustomText";
 import CustomBtn from "../../../../components/StyledComponents/CustomBtn";
-import { countriesData } from "../../../../constants/countriesData";
+// import { countriesData } from "../../../../constants/countriesData";
 import { useSelector } from "react-redux";
 import { colors } from "../../../../constants/colors";
 import { generalSizes } from "../../../../constants/globalStyles";
@@ -21,7 +21,7 @@ padding:8px 12px;
 border-radius:6px
 `
 
-const CountryPickerModal = ({ isVisible = false, onDismiss = () => { } }) => {
+const CountryPickerModal = ({ isVisible = false, onDismiss = () => { }, onPress, countriesData = [] }) => {
     const { themes, currencyData } = useSelector(store => store)
     const { isLoading, currency } = currencyData || {}
     const { theme } = themes || {}
@@ -48,7 +48,7 @@ const CountryPickerModal = ({ isVisible = false, onDismiss = () => { } }) => {
                         <ModalView isDark={isDarkThemeSelected} bg={selected_theme}>
                             <FlatList
                                 data={countriesData}
-                                renderItem={(props) => <ModalItem isDark={isDarkThemeSelected} {...props} />}
+                                renderItem={(props) => <ModalItem onPress={onPress} isDark={isDarkThemeSelected} {...props} />}
                                 keyExtractor={(item) => item?.id.toString()}
                             />
                         </ModalView>
@@ -56,12 +56,6 @@ const CountryPickerModal = ({ isVisible = false, onDismiss = () => { } }) => {
                 </Pressable>
 
             </Modal>
-            {/* <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}
-            >
-                <Text style={styles.textStyle}>Show Modal</Text>
-            </Pressable> */}
         </View>
     );
 };

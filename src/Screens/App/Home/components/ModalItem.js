@@ -17,13 +17,13 @@ color:${props => props.isDark ? colors.parrot : colors.blue};
 `
 
 
-const ModalItem = ({ item, isDark }) => {
-    const { name, identifier } = item || {};
+const ModalItem = ({ item, isDark, onPress }) => {
+    const { name, identifier, selected } = item || {};
     return (
         <Container>
-            <ModalBtn>
+            <ModalBtn onPress={() => onPress(item)}>
                 <CustomText>{name} - {identifier}</CustomText>
-                <Icon isDark={isDark} name="checkmark-circle" size={20} />
+                {selected && <Icon isDark={isDark} name="checkmark-circle" size={20} />}
             </ModalBtn>
         </Container>
     )

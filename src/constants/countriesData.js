@@ -24,19 +24,5 @@ export const countriesData = [
         identifier: "INR",
         name: "Indian Rupee"
     },
-    {
-        id: 6,
-        identifier: "INR",
-        name: "Indian Rupee"
-    },
-    {
-        id: 7,
-        identifier: "INR",
-        name: "Indian Rupee"
-    },
-    {
-        id: 8,
-        identifier: "INR",
-        name: "Indian Rupee"
-    },
+
 ]

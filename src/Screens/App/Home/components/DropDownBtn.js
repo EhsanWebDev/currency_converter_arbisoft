@@ -13,13 +13,13 @@ background-color:${props => props.isDark ? "rgba(255, 255, 255, 0.3)" : " rgba(0
 flex-direction: row;
 border-radius:20px;
 `
-const DropDownBtn = ({ title = "USD" }) => {
+const DropDownBtn = ({ title = "USD", onPress }) => {
     const { themes, currencyData } = useSelector(store => store)
     const { isLoading, currency } = currencyData || {}
     const { theme } = themes || {}
     const { selected_theme, isDarkThemeSelected } = theme || {}
     return (
-        <HomeBtn isDark={isDarkThemeSelected}>
+        <HomeBtn isDark={isDarkThemeSelected} onPress={onPress}>
             <CustomText bold>{title}</CustomText>
             <IonIcon name='chevron-down' style={{ marginLeft: 8 }} size={20} color={isDarkThemeSelected ? colors.ghost_white : colors.black} />
         </HomeBtn>

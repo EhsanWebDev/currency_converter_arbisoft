@@ -18,7 +18,7 @@ const CurrencyCard = ({ onFocus, onBlur }) => {
     return (
         <HomeInput isDark={isDarkThemeSelected} mv={20} flex_dir="column" mh={0} ph={20} pv={16} border_r={20}>
             <CustomText mv={4} size={18}>Amount</CustomText>
-            <CustomInput onFocus={onFocus} onBlur={onBlur} />
+            <CustomInput boldLabel inputLabel={baseCurrency} onFocus={onFocus} onBlur={onBlur} />
             <Container mh={0} mv={8}>
                 <CustomText size={14}>100 {baseCurrency} = <CustomText bold size={14}>9.14 {secondaryCurrency}</CustomText></CustomText>
             </Container>
