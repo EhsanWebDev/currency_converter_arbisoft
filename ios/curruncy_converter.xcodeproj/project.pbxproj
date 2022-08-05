@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		187063FA289C9BF50040483A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 187063F9289C9BF50040483A /* Assets.xcassets */; };
 		6A2F51887E404F208ECF19E6 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE391C3B9A0242BC810B71BE /* Roboto-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-curruncy_converter-curruncy_converterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-curruncy_converter-curruncy_converterTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -52,6 +53,7 @@
 		182FC9FD28982710007AF81A /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		182FC9FE28982710007AF81A /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
 		182FC9FF28982710007AF81A /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		187063F9289C9BF50040483A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-curruncy_converter-curruncy_converterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-curruncy_converter-curruncy_converterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-curruncy_converter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-curruncy_converter.debug.xcconfig"; path = "Target Support Files/Pods-curruncy_converter/Pods-curruncy_converter.debug.xcconfig"; sourceTree = "<group>"; };
 		43DEE04C8F0343E9B15585B0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		13B07FAE1A68108700A75B9A /* curruncy_converter */ = {
 			isa = PBXGroup;
 			children = (
+				187063F9289C9BF50040483A /* Assets.xcassets */,
 				182FC9F1289826D1007AF81A /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -296,6 +299,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6A2F51887E404F208ECF19E6 /* Roboto-Bold.ttf in Resources */,
 				DA3085A84F24463A9108D095 /* Roboto-Regular.ttf in Resources */,
+				187063FA289C9BF50040483A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

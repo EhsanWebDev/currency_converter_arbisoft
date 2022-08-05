@@ -12,6 +12,7 @@ export const colors = {
     purple: "#9882AC",
     blue: "#0E57D6",
     red: "#FF0035",
+    parrot: "#9CFC97",
 
     ghost_white: "#FBFBFF",
     black: "#11151C",

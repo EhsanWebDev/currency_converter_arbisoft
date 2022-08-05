@@ -7,6 +7,7 @@ import Container from './Container';
 import CustomText from './CustomText';
 import IonIcon from "react-native-vector-icons/Ionicons"
 import CustomBtn from './CustomBtn';
+import { TextInput } from 'react-native';
 
 const { dark, ghost_white, black } = colors || {}
 
@@ -36,8 +37,10 @@ padding:12px;
 `
 
 const CustomInput = (props) => {
-    const { theme } = useSelector(store => store.themes)
-    const { isDarkThemeSelected } = theme || {}
+    const { themes, currencyData } = useSelector(store => store)
+    const { isLoading, currency, baseCurrency } = currencyData || {}
+    const { theme } = themes || {}
+    const { selected_theme, isDarkThemeSelected } = theme || {}
     return (
         <Container
             mh={0}
@@ -45,8 +48,9 @@ const CustomInput = (props) => {
             border_r={12}
             jc="space-between" align_items="center"
             bg={isDarkThemeSelected ? "rgba(0, 0, 0, 0.3)" : "#00000030"} >
-            <InputText bold>USD</InputText>
+            <InputText bold>{baseCurrency}</InputText>
             <StyledInput isDark={isDarkThemeSelected} {...props} />
+
             <InputBtn>
                 <IonIcon name='sync' size={24} color={isDarkThemeSelected ? colors.ghost_white : colors.black} onPress={() => { }} />
             </InputBtn>
