@@ -4,10 +4,10 @@ import { colors } from "../../constants/colors"
 
 const INITIAL_STATE = {
     theme: {
-        isDarkThemeSelected: true,
+        isDarkThemeSelected: false,
         default_text_color: colors.ghost_white,
         default_bg_color: colors.dark,
-        selected_theme: colors.dark
+        selected_theme: colors.light_alice_blue
     }
 }
 
