@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { colors } from '../../constants/colors';
 import { app_fonts } from "../../constants/constants";
 import { generalSizes } from "../../constants/globalStyles"
@@ -19,24 +19,27 @@ text-align: ${props => props.textCenter ? "center" : "left"}
 
 
 const CustomText = (props) => {
+
     const { theme } = useSelector(store => store.themes)
     const { isDarkThemeSelected } = theme || {}
 
+    const textColor = isDarkThemeSelected ? ghost_white : black
+
     return (
-        <StyledText color={isDarkThemeSelected ? ghost_white : black} {...props}>
+        <StyledText color={textColor} {...props}>
             {props.children}
         </StyledText>
     )
 }
 
 CustomText.propTypes = {
+    size: PropTypes.number,
+    bold: PropTypes.bool,
+    textCenter: PropTypes.bool,
     children: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array
     ]).isRequired,
-    size: PropTypes.number,
-    bold: PropTypes.bool,
-    textCenter: PropTypes.bool
 }
 
 export default CustomText

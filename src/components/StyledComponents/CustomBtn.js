@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components/native"
 
 const CustomBtn = styled.TouchableOpacity`
 justify-content:center;

@@ -5,7 +5,8 @@ import IonIcon from "react-native-vector-icons/Ionicons"
 import CustomText from '../../../../components/StyledComponents/CustomText';
 import styled from 'styled-components';
 import { colors } from '../../../../constants/colors';
-
+import types from "prop-types"
+import { generalSizes } from '../../../../constants/globalStyles';
 
 const ModalBtn = styled(CustomBtn)`
 flex-direction:row;
@@ -22,11 +23,18 @@ const ModalItem = ({ item, isDark, onPress }) => {
     return (
         <Container>
             <ModalBtn onPress={() => onPress(item)}>
-                <CustomText>{name} - {identifier}</CustomText>
-                {selected && <Icon isDark={isDark} name="checkmark-circle" size={20} />}
+                <CustomText>{identifier} - {name}</CustomText>
+                {selected && <Icon isDark={isDark} name="checkmark-circle" size={generalSizes.iconSize_med} />}
             </ModalBtn>
         </Container>
     )
 }
+
+ModalItem.propTypes = {
+    isDark: types.bool,
+    item: types.object,
+    onPress: types.func
+}
+
 
 export default ModalItem;

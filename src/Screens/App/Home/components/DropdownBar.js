@@ -8,18 +8,31 @@ import CountryPickerModal from './CountryPickerModal';
 import DropDownBtn from './DropDownBtn';
 import { selectBaseCountry, selectSecondCountry, toggleCurrency } from '../../../../store/currencyReducer/currencyReducer';
 import { Alert } from 'react-native';
+import { generalSizes } from '../../../../constants/globalStyles';
 
 
 const DropdownBar = (props) => {
-    const { themes, currencyData } = useSelector(store => store)
-    const { isLoading, currency, baseCurrency, secondaryCurrency, baseCountries, secondaryCountries } = currencyData || {}
-    const { theme } = themes || {}
-    const { selected_theme, isDarkThemeSelected } = theme || {}
+    const { currencyData } = useSelector(store => store)
+    const { isLoading, currency, baseCurrency,
+        secondaryCurrency,
+        baseCountries, secondaryCountries
+    } = currencyData || {}
+
     const dispatch = useDispatch()
 
     const [isModalVisible, setisModalVisible] = useState(false)
 
     const [isSecondaryModalVisible, setIsSecondaryModalVisible] = useState(false)
+
+
+    const onToggle = () => dispatch(toggleCurrency())
+
+    const onBaseCurrencyBtnPress = () => setisModalVisible(true)
+    const onSecondaryCurrencyBtnPress = () => setIsSecondaryModalVisible(true)
+
+    const onBaseModalDismiss = () => setisModalVisible(false)
+    const onSecondaryModalDismiss = () => setIsSecondaryModalVisible(false)
+
 
 
     const validateSelection = (item, currencyType, As) => {
@@ -49,23 +62,25 @@ const DropdownBar = (props) => {
     }
 
 
+
     return (
         <>
             <CountryPickerModal
                 onPress={handleSelectBaseCountry}
                 countriesData={baseCountries}
-                isVisible={isModalVisible} onDismiss={() => setisModalVisible(false)} />
+                isVisible={isModalVisible} onDismiss={onBaseModalDismiss} />
             <CountryPickerModal
                 onPress={handleSelectSecondaryCountry}
                 countriesData={secondaryCountries}
                 isVisible={isSecondaryModalVisible}
-                onDismiss={() => setIsSecondaryModalVisible(false)} />
+                onDismiss={onSecondaryModalDismiss} />
+
             <Container mv={10} flex={1} mh={0} jc="space-between" align_items="center">
-                <DropDownBtn title={baseCurrency} onPress={() => setisModalVisible(true)} />
-                <CustomBtn onPress={() => dispatch(toggleCurrency())}>
-                    <IonIcon name='swap-horizontal' size={24} color={colors.mid_purple} />
+                <DropDownBtn title={baseCurrency} onPress={onBaseCurrencyBtnPress} />
+                <CustomBtn onPress={onToggle}>
+                    <IonIcon name='swap-horizontal' size={generalSizes.iconSize_lg} color={colors.mid_purple} />
                 </CustomBtn>
-                <DropDownBtn title={secondaryCurrency} onPress={() => setIsSecondaryModalVisible(true)} />
+                <DropDownBtn title={secondaryCurrency} onPress={onSecondaryCurrencyBtnPress} />
             </Container>
         </>
 

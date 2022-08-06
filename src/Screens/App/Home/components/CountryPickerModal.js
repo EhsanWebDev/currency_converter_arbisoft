@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TouchableOpacity, TouchableWithoutFeedback, ScrollView, FlatList } from "react-native";
+import React from "react";
+import { Modal, Pressable, View, FlatList } from "react-native";
 import Container from "../../../../components/StyledComponents/Container";
-import CustomText from "../../../../components/StyledComponents/CustomText";
-import CustomBtn from "../../../../components/StyledComponents/CustomBtn";
-// import { countriesData } from "../../../../constants/countriesData";
+
 import { useSelector } from "react-redux";
 import { colors } from "../../../../constants/colors";
-import { generalSizes } from "../../../../constants/globalStyles";
 import styled from "styled-components";
 import ModalItem from "./ModalItem";
-
+import types from "prop-types"
+import { styles } from "./modalStyles";
 
 
 const ModalView = styled(Container)`
@@ -22,29 +20,20 @@ border-radius:6px
 `
 
 const CountryPickerModal = ({ isVisible = false, onDismiss = () => { }, onPress, countriesData = [] }) => {
-    const { themes, currencyData } = useSelector(store => store)
-    const { isLoading, currency } = currencyData || {}
+    const { themes, } = useSelector(store => store)
     const { theme } = themes || {}
     const { selected_theme, isDarkThemeSelected } = theme || {}
 
-    const [modalVisible, setModalVisible] = useState(false);
     return (
         <View style={styles.centeredView}>
             <Modal
                 animationType="slide"
                 transparent={true}
                 visible={isVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                    onDismiss()
-                }}
+                onRequestClose={() => onDismiss()}
             >
-                <Pressable style={styles.centeredView} onPressOut={() => {
-                    setModalVisible(false);
-                    onDismiss()
-                }
-                }>
-                    <Pressable onPress={() => { }} >
+                <Pressable style={styles.centeredView} onPressOut={() => onDismiss()}>
+                    <Pressable>
                         <ModalView isDark={isDarkThemeSelected} bg={selected_theme}>
                             <FlatList
                                 data={countriesData}
@@ -60,39 +49,12 @@ const CountryPickerModal = ({ isVisible = false, onDismiss = () => { }, onPress,
     );
 };
 
-const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-    },
-    modalView: {
-        marginHorizontal: generalSizes.sizeLg,
-        borderRadius: 8,
-        padding: generalSizes.sizeMd,
-        maxHeight: 320,
-        borderColor: colors.light_gray,
-        borderWidth: 2
-    },
-    button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
-    },
-    buttonOpen: {
-        backgroundColor: "#F194FF",
-    },
-    buttonClose: {
-        backgroundColor: "#2196F3",
-    },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-    }
-});
+
+CountryPickerModal.propTypes = {
+    isVisible: types.bool,
+    countriesData: types.array,
+    onDismiss: types.func,
+    onPress: types.func,
+}
 
 export default CountryPickerModal;

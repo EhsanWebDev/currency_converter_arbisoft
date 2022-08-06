@@ -1,31 +1,28 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { colors } from '../../constants/colors';
 import { generalSizes } from '../../constants/globalStyles';
 import Container from './Container';
 import CustomText from './CustomText';
 import IonIcon from "react-native-vector-icons/Ionicons"
 import CustomBtn from './CustomBtn';
-import { TextInput } from 'react-native';
 import PropTypes from "prop-types"
 
-const { dark, ghost_white, black } = colors || {}
-
-const StyledInput = styled.TextInput.attrs({
-
-    placeholderColor: props => props.isDark ? colors.ghost_white : colors.black,
-    selectionColor: colors.ghost_white,
+const { light_gray_less_opacity, ghost_white, black, dark_gray_op, gray, light_gray } = colors || {}
+const defaultInputProps = {
+    selectionColor: ghost_white,
     keyboardType: "numeric"
+}
 
-})`
-height: 50px;
+const StyledInput = styled.TextInput.attrs(defaultInputProps)`
+height: ${generalSizes.inputHeight}px;
 margin: ${props => props.mv ?? generalSizes.sizeMd}px ${props => props.mh ?? 0}px;
 flex:1;
 font-size: ${generalSizes.baseFontSize}px ;
 padding: 0px 6px;
-color:${props => props.isDark ? colors.ghost_white : colors.black};
-background-color:rgba(255,255,255,0.1)
+color:${props => props.isDark ? ghost_white : black};
+background-color:${light_gray_less_opacity}
 `
 
 const InputText = styled(CustomText)`
@@ -33,30 +30,38 @@ const InputText = styled(CustomText)`
 `;
 
 const InputBtn = styled(CustomBtn)`
-background-color:  rgba(255, 255, 255, 0.3);
+background-color: ${light_gray};
 padding:12px;
 `
 
 const CustomInput = (props) => {
-    const { hideInputIcon, inputLabel, boldLabel } = props || {}
+    const { hideInputIcon, inputLabel, boldLabel, onIconPress, iconName = "sync" } = props || {}
 
     const { themes, currencyData } = useSelector(store => store)
-    const { isLoading, currency, baseCurrency } = currencyData || {}
+
+    const { isLoading, } = currencyData || {}
     const { theme } = themes || {}
-    const { selected_theme, isDarkThemeSelected } = theme || {}
+    const { isDarkThemeSelected } = theme || {}
+
+    const iconColor = isDarkThemeSelected ? ghost_white : black
+    const containerBg = isDarkThemeSelected ? dark_gray_op : gray
+
     return (
         <Container
             mh={0}
-            height={50}
+            height={generalSizes.inputHeight}
             border_r={12}
             jc="space-between" align_items="center"
-            bg={isDarkThemeSelected ? "rgba(0, 0, 0, 0.3)" : "#00000030"} >
+            bg={containerBg} >
+
             <InputText bold={boldLabel} size={14}>{inputLabel}</InputText>
             <StyledInput isDark={isDarkThemeSelected} {...props} />
 
-            {!hideInputIcon && <InputBtn>
-                <IonIcon name='sync' size={24} color={isDarkThemeSelected ? colors.ghost_white : colors.black} onPress={() => { }} />
-            </InputBtn>}
+            {!hideInputIcon &&
+                <InputBtn onPress={onIconPress}>
+                    <IonIcon name={iconName} size={generalSizes.iconSize_lg} color={iconColor} />
+                </InputBtn>
+            }
 
         </Container>
 
@@ -66,7 +71,9 @@ const CustomInput = (props) => {
 CustomInput.propTypes = {
     hideInputIcon: PropTypes.bool,
     inputLabel: PropTypes.string.isRequired,
-    boldLabel: PropTypes.bool
+    boldLabel: PropTypes.bool,
+    iconName: PropTypes.string,
+    onIconPress: PropTypes.func
 }
 
 export default CustomInput

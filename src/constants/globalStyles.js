@@ -8,5 +8,9 @@ export const generalSizes = {
     sectionMediumHeadingSize: 14,
 
     baseFontSize: 16,
-    baseInputFontSize: 14
+    baseInputFontSize: 14,
+    inputHeight: 50,
+
+    iconSize_lg: 24,
+    iconSize_med: 20,
 }

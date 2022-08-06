@@ -1,8 +1,7 @@
 import React from 'react';
-import Container from './Container';
 import IonIcons from "react-native-vector-icons/Ionicons"
 import CustomText from './CustomText';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { generalSizes } from '../../constants/globalStyles';
 import CustomBtn from './CustomBtn';
 import { colors } from '../../constants/colors';
@@ -17,8 +16,6 @@ padding: ${generalSizes.sizeLg}px ${generalSizes.sizeLg}px;
 border-bottom-width:0.5px;
 border-bottom-color:${props => props.isDark ? colors.light_gray : colors.dark};
 `
-const HeaderButton = styled(CustomBtn)`
-`
 const HeaderText = styled(CustomText)`
 flex:1;
 text-align: center;
@@ -28,14 +25,16 @@ margin-right:20px;
 const Header = ({ title = "", onBackPress = () => { } }) => {
     const { theme } = useSelector(store => store?.themes)
     const { isDarkThemeSelected } = theme || {}
+
+    const iconColor = isDarkThemeSelected ? colors.ghost_white : colors.black
+
     return (
         <HeaderWrapper isDark={isDarkThemeSelected}>
-            <HeaderButton onPress={onBackPress}>
-                <IonIcons name='chevron-back' size={20}
-                    color={isDarkThemeSelected ? colors.ghost_white : colors.black}
-
+            <CustomBtn onPress={onBackPress}>
+                <IonIcons name='chevron-back' size={generalSizes.iconSize_lg}
+                    color={iconColor}
                 />
-            </HeaderButton>
+            </CustomBtn>
             <HeaderText>{title}</HeaderText>
         </HeaderWrapper>
     )

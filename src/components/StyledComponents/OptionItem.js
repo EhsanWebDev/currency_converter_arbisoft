@@ -25,13 +25,16 @@ align-items:stretch
 const OptionItem = ({ title = "", iconName = "ios-settings-outline", onItemPress }) => {
     const { theme } = useSelector(store => store?.themes)
     const { isDarkThemeSelected } = theme || {}
+
+    const iconColor = isDarkThemeSelected ? colors.ghost_white : colors.black
+
     return (
         <ItemBtn onPress={onItemPress} isDark={isDarkThemeSelected}>
             <ItemWrapper>
                 <CustomText size={14}>{title}</CustomText>
                 <IonIcon
-                    name={iconName} size={20}
-                    color={isDarkThemeSelected ? colors.ghost_white : colors.black} />
+                    name={iconName} size={generalSizes.iconSize_med}
+                    color={iconColor} />
             </ItemWrapper>
         </ItemBtn>
 
