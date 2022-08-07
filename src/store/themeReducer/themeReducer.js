@@ -7,7 +7,7 @@ const INITIAL_STATE = {
         isDarkThemeSelected: false,
         default_text_color: colors.ghost_white,
         default_bg_color: colors.dark,
-        selected_theme: colors.light_alice_blue
+        selected_theme: colors.dark
     }
 }
 

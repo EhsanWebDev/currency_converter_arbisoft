@@ -7,7 +7,7 @@ export const countriesData = [
     {
         id: 2,
         identifier: "USD",
-        name: "United States Dollar"
+        name: "United States Dollar",
     },
     {
         id: 3,
@@ -23,6 +23,16 @@ export const countriesData = [
         id: 5,
         identifier: "INR",
         name: "Indian Rupee"
+    },
+    {
+        id: 6,
+        identifier: "GBP",
+        name: "British Pound Sterling"
+    },
+    {
+        id: 7,
+        identifier: "NZD",
+        name: "New Zealand Dollar"
     },
 
 ]

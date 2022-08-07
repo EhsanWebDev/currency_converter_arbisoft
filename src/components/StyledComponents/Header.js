@@ -1,12 +1,16 @@
 import React from 'react';
-import IonIcons from "react-native-vector-icons/Ionicons"
-import CustomText from './CustomText';
-import styled from 'styled-components/native';
-import { generalSizes } from '../../constants/globalStyles';
-import CustomBtn from './CustomBtn';
-import { colors } from '../../constants/colors';
 import PropTypes from "prop-types"
+import IonIcons from "react-native-vector-icons/Ionicons"
 import { useSelector } from 'react-redux';
+import styled from 'styled-components/native';
+
+import CustomText from './CustomText';
+import CustomBtn from './CustomBtn';
+
+import { generalSizes } from '../../constants/globalStyles';
+import { colors } from '../../constants/colors';
+
+
 
 const HeaderWrapper = styled.View`
 flex-direction:row;

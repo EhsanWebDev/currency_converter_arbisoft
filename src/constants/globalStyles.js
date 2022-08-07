@@ -9,7 +9,7 @@ export const generalSizes = {
 
     baseFontSize: 16,
     baseInputFontSize: 14,
-    inputHeight: 50,
+    inputHeight: 44,
 
     iconSize_lg: 24,
     iconSize_med: 20,

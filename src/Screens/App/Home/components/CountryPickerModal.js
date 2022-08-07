@@ -1,12 +1,14 @@
 import React from "react";
 import { Modal, Pressable, View, FlatList } from "react-native";
+import types from "prop-types"
+import { useSelector } from "react-redux";
+
+import ModalItem from "./ModalItem";
+
+import styled from "styled-components";
 import Container from "../../../../components/StyledComponents/Container";
 
-import { useSelector } from "react-redux";
 import { colors } from "../../../../constants/colors";
-import styled from "styled-components";
-import ModalItem from "./ModalItem";
-import types from "prop-types"
 import { styles } from "./modalStyles";
 
 

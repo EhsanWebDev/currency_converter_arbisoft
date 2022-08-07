@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, Linking, Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../store/userReducer/userSlice';
+
 import Header from '../../../components/StyledComponents/Header';
 import OptionItem from '../../../components/StyledComponents/OptionItem';
+
 import { FIXER_URL } from '../../../constants/constants';
 import { APP_ROUTES } from '../../../navigation/AppRoutes';
-import { logout } from '../../../store/userReducer/userSlice';
+
 
 
 

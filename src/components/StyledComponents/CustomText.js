@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styled from "styled-components/native";
+
 import { colors } from '../../constants/colors';
 import { app_fonts } from "../../constants/constants";
 import { generalSizes } from "../../constants/globalStyles"
-import PropTypes from 'prop-types';
+
 
 const { dark, ghost_white, black } = colors || {}
 

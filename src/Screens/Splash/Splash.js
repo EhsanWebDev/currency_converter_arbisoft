@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native'
 import { useSelector } from 'react-redux';
+
 import SvgComponent from '../../../assets/images/SVGs';
 import Container from '../../components/StyledComponents/Container';
 import CustomText from '../../components/StyledComponents/CustomText';
+
 import { APP_ROUTES } from '../../navigation/AppRoutes';
 
 
 const Splash = ({ navigation }) => {
-    const { user: userReducer } = useSelector(store => store)
+    const { user: userReducer, themes } = useSelector(store => store)
     const { user } = userReducer || {}
+    const { theme } = themes || {}
+    const { isDarkThemeSelected } = theme || {}
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -27,7 +31,7 @@ const Splash = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Container flex={1} mh={0} mv={20} flex_dir="column" align_items="center" jc="center">
-                <SvgComponent />
+                <SvgComponent isDark={isDarkThemeSelected} />
                 <CustomText size={24} bold color="black">Currency Converter</CustomText>
             </Container>
             <Container flex={1} jc="center" align_items="flex-end">

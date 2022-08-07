@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Container from '../../../../components/StyledComponents/Container';
-import IonIcon from "react-native-vector-icons/Ionicons"
-import { colors } from '../../../../constants/colors';
-import CustomBtn from '../../../../components/StyledComponents/CustomBtn';
-import CountryPickerModal from './CountryPickerModal';
-import DropDownBtn from './DropDownBtn';
-import { selectBaseCountry, selectSecondCountry, toggleCurrency } from '../../../../store/currencyReducer/currencyReducer';
 import { Alert } from 'react-native';
+import IonIcon from "react-native-vector-icons/Ionicons"
+
+import { useDispatch, useSelector } from 'react-redux';
+import { selectBaseCountry, selectSecondCountry, toggleCurrency } from '../../../../store/currencyReducer/currencyReducer';
+
+import CountryPickerModal from './CountryPickerModal';
+import Container from '../../../../components/StyledComponents/Container';
+import CustomBtn from '../../../../components/StyledComponents/CustomBtn';
+
+import DropDownBtn from './DropDownBtn';
+
+import { colors } from '../../../../constants/colors';
 import { generalSizes } from '../../../../constants/globalStyles';
 
 
 const DropdownBar = (props) => {
-    const { currencyData } = useSelector(store => store)
+    const { currencyData, themes: { theme } } = useSelector(store => store)
     const { isLoading, currency, baseCurrency,
         secondaryCurrency,
         baseCountries, secondaryCountries
     } = currencyData || {}
+    const { isDarkThemeSelected } = theme || {}
 
     const dispatch = useDispatch()
 
@@ -48,20 +53,29 @@ const DropdownBar = (props) => {
     }
 
     const handleSelectBaseCountry = (item) => {
+
         const isValid = validateSelection(item, secondaryCurrency, "secondary currency")
 
-        if (isValid)
+        if (isValid) {
+            onBaseModalDismiss()
             dispatch(selectBaseCountry({ item }))
+
+        }
+
     }
 
     const handleSelectSecondaryCountry = (item) => {
         const isValid = validateSelection(item, baseCurrency, "base currency")
 
-        if (isValid)
+        if (isValid) {
+            onSecondaryModalDismiss()
             dispatch(selectSecondCountry({ item }))
+        }
+
     }
 
 
+    const iconColor = isDarkThemeSelected ? colors.mid_purple : colors.blue
 
     return (
         <>
@@ -78,7 +92,7 @@ const DropdownBar = (props) => {
             <Container mv={10} flex={1} mh={0} jc="space-between" align_items="center">
                 <DropDownBtn title={baseCurrency} onPress={onBaseCurrencyBtnPress} />
                 <CustomBtn onPress={onToggle}>
-                    <IonIcon name='swap-horizontal' size={generalSizes.iconSize_lg} color={colors.mid_purple} />
+                    <IonIcon name='swap-horizontal' size={generalSizes.iconSize_lg} color={iconColor} />
                 </CustomBtn>
                 <DropDownBtn title={secondaryCurrency} onPress={onSecondaryCurrencyBtnPress} />
             </Container>

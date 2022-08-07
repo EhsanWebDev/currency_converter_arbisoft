@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, Text, StatusBar, ScrollView, Animated, Easing, KeyboardAvoidingView, Platform } from 'react-native'
+import { StyleSheet, SafeAreaView, Text, StatusBar, ScrollView, Animated, Easing, KeyboardAvoidingView, Platform, Alert } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
+import { currencyFetchLoading, } from '../../../store/currencyReducer/currencyReducer';
+
 import SvgComponent from '../../../../assets/images/SVGs';
 import CustomText from '../../../components/StyledComponents/CustomText';
 import IonIcon from "react-native-vector-icons/Ionicons"
 import Container from '../../../components/StyledComponents/Container';
-import CustomInput from '../../../components/StyledComponents/CustomInput';
-import { colors } from '../../../constants/colors';
-import CustomBtn from '../../../components/StyledComponents/CustomBtn';
-import styled from 'styled-components';
-import { sagaActions } from '../../../Api/Sagas/sagaActions';
-import { currencyFetchLoading, currencyFetchSuccess, fetchCurrencyData } from '../../../store/currencyReducer/currencyReducer';
 import DropdownBar from './components/DropdownBar';
 import CurrencyCard from './components/CurrencyCard';
+
+import { colors } from '../../../constants/colors';
 import { APP_ROUTES } from '../../../navigation/AppRoutes';
 
 
@@ -20,10 +18,13 @@ import { APP_ROUTES } from '../../../navigation/AppRoutes';
 
 const Home = ({ navigation: { navigate } }) => {
     const { themes, currencyData } = useSelector(store => store)
-    const { isLoading, currency } = currencyData || {}
+    const { isLoading, currency, baseCurrency,
+        secondaryCurrency, } = currencyData || {}
     const { theme } = themes || {}
     const { selected_theme, isDarkThemeSelected } = theme || {}
     const dispatch = useDispatch()
+
+    const [amountValue, setAmountValue] = useState("")
 
     const [isFocusing, setIsFocusing] = useState(false)
     const [focusAnimatedValue, setFocusAnimatedValue] = useState(new Animated.Value(0));
@@ -54,7 +55,6 @@ const Home = ({ navigation: { navigate } }) => {
         });
     }
     const startBlurAnimation = () => {
-        // Animated.loop(
         Animated.timing(
             blurAnimatedValue,
             {
@@ -66,15 +66,22 @@ const Home = ({ navigation: { navigate } }) => {
         ).start(() => {
             setBlurAnimatedValue(new Animated.Value(0))
         })
-        // ).start();
     }
 
-    // useEffect(() => {
-    //     dispatch(currencyFetchLoading({
-    //         data: 3
-    //     }))
+    const handlePress = () => {
+        const notValidAmount = !amountValue || !amountValue.trim() || isNaN(amountValue)
 
-    // }, [dispatch])
+        if (notValidAmount) {
+            Alert.alert("Please input some value to fetch currency rates.")
+            return
+        }
+        dispatch(currencyFetchLoading({
+            baseCurrency,
+            secondaryCurrency,
+            amount: amountValue?.trim()
+        }))
+        setAmountValue("")
+    }
 
 
     return (
@@ -97,12 +104,15 @@ const Home = ({ navigation: { navigate } }) => {
                         <Container flex_dir="column" mh={0} mv={20}>
                             <Container mh={0} mv={20} jc="center">
                                 <Animated.View style={{ transform: [{ rotate: isFocusing ? focusSpin : blurSpin }] }}>
-                                    <SvgComponent />
+                                    <SvgComponent isDark={isDarkThemeSelected} />
                                 </Animated.View>
 
                             </Container>
                             <DropdownBar />
                             <CurrencyCard
+                                value={amountValue}
+                                onChange={(value) => setAmountValue(value)}
+                                onIconPress={handlePress}
                                 onBlur={() => {
                                     startBlurAnimation();
                                     setIsFocusing(false)

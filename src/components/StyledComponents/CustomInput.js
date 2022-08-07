@@ -1,21 +1,24 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
+import PropTypes from "prop-types"
 import { useSelector } from 'react-redux';
+import IonIcon from "react-native-vector-icons/Ionicons"
 import styled from 'styled-components/native';
-import { colors } from '../../constants/colors';
-import { generalSizes } from '../../constants/globalStyles';
+
 import Container from './Container';
 import CustomText from './CustomText';
-import IonIcon from "react-native-vector-icons/Ionicons"
 import CustomBtn from './CustomBtn';
-import PropTypes from "prop-types"
+
+import { colors } from '../../constants/colors';
+import { generalSizes } from '../../constants/globalStyles';
 
 const { light_gray_less_opacity, ghost_white, black, dark_gray_op, gray, light_gray } = colors || {}
-const defaultInputProps = {
-    selectionColor: ghost_white,
-    keyboardType: "numeric"
-}
 
-const StyledInput = styled.TextInput.attrs(defaultInputProps)`
+
+const StyledInput = styled.TextInput.attrs(props => ({
+    selectionColor: props.isDark ? ghost_white : black,
+    keyboardType: props.keyboardType
+}))`
 height: ${generalSizes.inputHeight}px;
 margin: ${props => props.mv ?? generalSizes.sizeMd}px ${props => props.mh ?? 0}px;
 flex:1;
@@ -59,7 +62,10 @@ const CustomInput = (props) => {
 
             {!hideInputIcon &&
                 <InputBtn onPress={onIconPress}>
-                    <IonIcon name={iconName} size={generalSizes.iconSize_lg} color={iconColor} />
+                    {isLoading ?
+                        <ActivityIndicator color={iconColor} /> :
+                        <IonIcon name={iconName} size={generalSizes.iconSize_med} color={iconColor} />
+                    }
                 </InputBtn>
             }
 

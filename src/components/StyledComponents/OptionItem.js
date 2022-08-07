@@ -1,13 +1,17 @@
 import React from 'react';
-import Container from './Container';
-import CustomText from './CustomText';
+import PropTypes from "prop-types"
 import IonIcon from "react-native-vector-icons/Ionicons"
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
+import Container from './Container';
+import CustomText from './CustomText';
+import CustomBtn from './CustomBtn';
+
 import { generalSizes } from '../../constants/globalStyles';
 import { colors } from '../../constants/colors';
-import PropTypes from "prop-types"
-import CustomBtn from './CustomBtn';
-import { useSelector } from 'react-redux';
+
+
 
 const ItemWrapper = styled(Container)`
 margin:0px;

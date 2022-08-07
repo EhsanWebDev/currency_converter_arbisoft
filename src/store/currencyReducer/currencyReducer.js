@@ -1,14 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { countriesData } from "../../constants/countriesData";
+import { countriesData, } from "../../constants/countriesData";
+
+const baseCountriesData = countriesData.map(country => {
+    if (country.id === 2) return { ...country, selected: true }
+    return country
+})
+const secondaryCountriesData = countriesData.map(country => {
+    if (country.id === 4) return { ...country, selected: true }
+    return country
+})
 
 
 const INITIAL_STATE = {
-    currency: [],
+    currencyValues: {},
     isLoading: false,
+    error: false,
     baseCurrency: "USD",
-    secondaryCurrency: "EUR",
-    baseCountries: [...countriesData],
-    secondaryCountries: [...countriesData]
+    secondaryCurrency: "PKR",
+    baseCountries: baseCountriesData,
+    secondaryCountries: secondaryCountriesData
 }
 
 const currencySlice = createSlice({
@@ -19,11 +29,16 @@ const currencySlice = createSlice({
             state.isLoading = true
         },
         currencyFetchSuccess: (state, action) => {
+            const { payload } = action || {}
+            const { date, result, amount } = payload || {}
+
             state.isLoading = false;
-            console.log({ action, })
+            state.currencyValues = { date, result, amount }
         },
-        currencyFetchFailed: (state) => {
+        currencyFetchFailed: (state, action) => {
+
             state.isLoading = false
+            state.error = action?.error
         },
 
         toggleCurrency: (state) => {
@@ -38,6 +53,7 @@ const currencySlice = createSlice({
             state.secondaryCurrency = tempBase
             state.baseCountries = tempSecondaryData
             state.secondaryCountries = tempBaseData
+            state.currencyValues = {}
 
         },
         selectBaseCountry: (state, action) => {

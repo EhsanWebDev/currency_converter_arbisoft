@@ -1,14 +1,17 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
+import { change_theme } from '../../../../store/themeReducer/themeReducer';
+
 import styled from 'styled-components';
 import Container from '../../../../components/StyledComponents/Container';
 import CustomBtn from '../../../../components/StyledComponents/CustomBtn';
 import CustomText from '../../../../components/StyledComponents/CustomText';
 import Header from '../../../../components/StyledComponents/Header';
+
 import { colors } from '../../../../constants/colors';
 import { generalSizes } from '../../../../constants/globalStyles';
-import { change_theme } from '../../../../store/themeReducer/themeReducer';
+
 
 const { dark, dark_blue, light_alice_blue, light_purple, red, light_gray, ghost_white } = colors || {}
 
